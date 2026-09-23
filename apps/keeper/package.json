@@ -1,0 +1,24 @@
+{
+  "name": "@keel/keeper",
+  "version": "0.1.0",
+  "private": true,
+  "description": "24/7 guardian for Keel hedges: margin top-ups and scheduled settlements via an agent wallet.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/keeper.ts",
+    "plan": "tsx src/plan.ts",
+    "signcheck": "tsx src/signcheck.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@keel/hedge-sdk": "0.1.0",
+    "@nktkas/hyperliquid": "0.33.3",
+    "viem": "^2.56.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3"
+  }
+}

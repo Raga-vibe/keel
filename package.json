@@ -1,0 +1,21 @@
+{
+  "name": "keel",
+  "private": true,
+  "description": "Keel — price certainty for real-world businesses, powered by Hyperliquid HIP-3 markets.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @keel/web",
+    "build": "npm run build -w @keel/web",
+    "test": "npm run test -w @keel/hedge-sdk",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "keeper": "npm run start -w @keel/keeper --",
+    "plan": "npm run plan -w @keel/keeper --"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}

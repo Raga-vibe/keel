@@ -160,8 +160,17 @@ For scale, all Hyperliquid builder codes together routed $24B of volume in a rec
 
 ## 10. Team
 
-- **[Your name]: founder.** [One or two lines: background, relevant experience, links.] Designed and shipped Keel end to end: hedge engine, web app, keeper and docs.
-- **Hiring next:** a derivatives and risk engineer, and a partnerships lead for fuel-card and stablecoin-treasury platforms.
+**RagaCrypt, founder** · [X @RagaCrypt](https://x.com/RagaCrypt) · [ragafolio.space](https://ragafolio.space) · [GitHub Raga-vibe](https://github.com/Raga-vibe)
+
+A data analyst and AI builder who works at the intersection of **markets, on-chain data and software that moves money safely**. Designed and shipped Keel solo, end to end: hedge engine, web app, 24/7 keeper and docs.
+
+Relevant prior work:
+
+- **[VaultOS](https://github.com/Raga-vibe/vaultos):** spending limits for AI agents that can move money (Next.js, TypeScript, Coinbase AgentKit on Base). It's the same safety principle as Keel's agent key, which can trade but never withdraw.
+- **[InsightFlow](https://github.com/Raga-vibe/insightflow):** live AI data-analysis tool. Drop in a spreadsheet, ask in plain English, get the answer with a chart. Built for a Devpost challenge.
+- **Research in progress:** whether on-chain data improves crypto volatility prediction (statistics, time series, machine learning). This work feeds directly into Keel's risk engine and stress tests.
+
+**Hiring next:** a derivatives and risk engineer, and a partnerships lead for fuel-card and stablecoin-treasury platforms.
 
 ## 11. The ask
 

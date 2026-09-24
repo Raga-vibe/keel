@@ -63,6 +63,10 @@ Export `hedges.json` from the dashboard. Without `--execute` the keeper runs as 
 - **Inverse FX.** USD/JPY is quoted in yen per dollar, so a yen bill of X is hedged with X/P² units short (first-order exact; tested).
 - **Basis honesty.** Diesel = crude + refining margin + taxes. Keel says plainly that it hedges the crude component.
 
+## Team
+
+Built by **RagaCrypt** · [X @RagaCrypt](https://x.com/RagaCrypt) · [ragafolio.space](https://ragafolio.space)
+
 ## License
 
 MIT

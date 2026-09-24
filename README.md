@@ -1,5 +1,7 @@
 # Keel
 
+[![CI](https://github.com/Raga-vibe/keel/actions/workflows/ci.yml/badge.svg)](https://github.com/Raga-vibe/keel/actions/workflows/ci.yml)
+
 **Price certainty for real businesses.** Keel lets a fleet operator lock in diesel costs, a jeweller lock in gold, or an importer lock in a euro invoice, using Hyperliquid's 24/7 HIP-3 commodity and FX perpetuals. There's no bank, no futures account, and no custody: hedges live in the user's own Hyperliquid account.
 
 Built for the Colosseum Crypto World's Fair hackathon, Hyperliquid track.
@@ -11,6 +13,12 @@ Built for the Colosseum Crypto World's Fair hackathon, Hyperliquid track.
 3. **The guardian runs it**: it tops up margin before liquidation gets close, closes each slice when its purchase date arrives, reconciles positions against the hedge book, and exports an accountant-friendly CSV.
 
 **Watch mode** runs the same risk engine read-only on *any* Hyperliquid address: it shows each commodity/FX position's liquidation distance, what Keel's guardian would do, and the real-world exposure it's equivalent to (e.g. "protects sales of 2,081 kg of silver"). It can also find live accounts from Hyperliquid's public trade feed.
+
+## Docs
+
+- [How Keel hedges](docs/METHODOLOGY.md): unit conversion, sizing, liquidation math, costs, guardian policy, limitations.
+- [Architecture](docs/ARCHITECTURE.md): components, hedge lifecycle, trust model, failure handling.
+- [Hedge SDK guide](packages/sdk/README.md): use the engine in your own app, with runnable [examples](packages/sdk/examples).
 
 ## Repo layout
 

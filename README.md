@@ -18,6 +18,7 @@ Built for the Colosseum Crypto World's Fair hackathon, Hyperliquid track.
 
 ## Docs
 
+- [Business plan](docs/BUSINESS_PLAN.md): problem, market, competition, go-to-market, revenue model, roadmap, risks.
 - [How Keel hedges](docs/METHODOLOGY.md): unit conversion, sizing, liquidation math, costs, guardian policy, limitations.
 - [Architecture](docs/ARCHITECTURE.md): components, hedge lifecycle, trust model, failure handling.
 - [Hedge SDK guide](packages/sdk/README.md): use the engine in your own app, with runnable [examples](packages/sdk/examples).

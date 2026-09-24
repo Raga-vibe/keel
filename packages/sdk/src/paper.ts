@@ -134,6 +134,7 @@ export class PaperVenue implements Venue {
         equityUsd: equity,
         unrealizedPnlUsd: upnl,
         leverage: p.leverage,
+        marginMode: "isolated" as const,
         maxLeverage: p.maxLeverage,
         liqPx: liquidationPrice({ side: p.side, size: p.size, price: mark, equity, maxLeverage: p.maxLeverage }),
         fundingSinceOpenUsd: p.fundingSinceOpen,

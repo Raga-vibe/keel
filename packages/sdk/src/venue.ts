@@ -14,6 +14,8 @@ export interface HedgePosition {
   equityUsd: number;
   unrealizedPnlUsd: number;
   leverage: number;
+  /** Keel opens isolated hedges; other accounts may hold cross-margined positions. */
+  marginMode: "isolated" | "cross";
   maxLeverage: number;
   liqPx: number;
   /** Funding paid since the position opened (negative = received). */
@@ -24,6 +26,8 @@ export interface AccountState {
   user: `0x${string}`;
   /** Collateral that can be moved into positions as extra margin. */
   availableUsd: number;
+  /** Account value on the HIP-3 dex (margin + unrealised PnL), when known. */
+  accountValueUsd?: number;
   positions: HedgePosition[];
   updatedAt: number;
 }

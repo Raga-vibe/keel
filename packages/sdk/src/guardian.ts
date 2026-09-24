@@ -102,7 +102,15 @@ export function evaluateGuardian(opts: {
 
     // 1) Liquidation protection.
     const distance = distanceToLiquidation(pos.side, pos.markPx, pos.liqPx);
-    if (distance < policy.warnDistance) {
+    if (distance < policy.warnDistance && pos.marginMode === "cross") {
+      // Isolated top-ups don't apply; the whole account backs a cross position.
+      actions.push({
+        kind: "alert",
+        coin,
+        level: distance < policy.criticalDistance ? "critical" : "warning",
+        message: `${coin} is cross-margined and ${(distance * 100).toFixed(1)}% from liquidation. Deposit USDC to the account.`,
+      });
+    } else if (distance < policy.warnDistance) {
       const targetLiq = pos.markPx * (1 - pos.side * policy.targetDistance);
       const needed =
         equityForLiquidationPrice(

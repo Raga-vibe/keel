@@ -10,13 +10,15 @@ Built for the Colosseum Crypto World's Fair hackathon, Hyperliquid track.
 2. **Keel plans the hedge**: it maps the exposure onto the right benchmark (Brent, WTI, gold, copper, EUR/USD, …), converts units, sizes a low-leverage isolated position, estimates fees and funding (median of the last 14 days), stress-tests ±30% moves, and builds an unwind schedule that follows the purchases.
 3. **The guardian runs it**: it tops up margin before liquidation gets close, closes each slice when its purchase date arrives, reconciles positions against the hedge book, and exports an accountant-friendly CSV.
 
+**Watch mode** runs the same risk engine read-only on *any* Hyperliquid address: it shows each commodity/FX position's liquidation distance, what Keel's guardian would do, and the real-world exposure it's equivalent to (e.g. "protects sales of 2,081 kg of silver"). It can also find live accounts from Hyperliquid's public trade feed.
+
 ## Repo layout
 
 | Path | What |
 |---|---|
 | `packages/sdk` | `@keel/hedge-sdk`: open-source hedge engine (catalog, planner, margin math, scenarios, guardian, paper and live venues, reports). |
-| `apps/web` | Next.js app: market board, hedge wizard, dashboard, simulation lab. |
-| `apps/keeper` | Node CLI: `plan` prints a hedge plan from live prices; `keeper` runs the guardian 24/7 with an agent key. |
+| `apps/web` | Next.js app: market board, hedge wizard, dashboard, simulation lab, watch mode. |
+| `apps/keeper` | Node CLI: `plan` prints a hedge plan from live prices, `watch` reports on any account, `keeper` runs the guardian 24/7 with an agent key. |
 
 ## Run it
 
@@ -25,6 +27,8 @@ npm install
 npm run dev          # web app on http://localhost:3000
 npm test             # SDK unit tests
 npm run plan -- diesel 40000 L monthly 6 buy 0.75
+npm run watch -- --find           # accounts trading commodities right now
+npm run watch -- 0xADDRESS        # read-only risk report for any account
 ```
 
 Paper mode (the default) fills at live mainnet prices with simulated funds, so no wallet is needed. Live mode trades on Hyperliquid testnet or mainnet through a browser-generated **agent key**. The user approves that key once; it can trade and move margin but can never withdraw.

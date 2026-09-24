@@ -13,7 +13,8 @@
     "test": "npm run test -w @keel/hedge-sdk",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "keeper": "npm run start -w @keel/keeper --",
-    "plan": "npm run plan -w @keel/keeper --"
+    "plan": "npm run plan -w @keel/keeper --",
+    "watch": "npm run watch -w @keel/keeper --"
   },
   "engines": {
     "node": ">=22.12"

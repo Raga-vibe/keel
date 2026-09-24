@@ -9,6 +9,7 @@
     "start": "tsx src/keeper.ts",
     "plan": "tsx src/plan.ts",
     "signcheck": "tsx src/signcheck.ts",
+    "watch": "tsx src/watch.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

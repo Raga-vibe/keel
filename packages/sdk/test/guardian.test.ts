@@ -12,7 +12,7 @@ const cfg = defaultConfig("testnet");
 const USER = "0x00000000000000000000000000000000000000aa" as const;
 
 function position(over: Partial<HedgePosition>): HedgePosition {
-  const base = { coin: "xyz:CL", assetId: 1, side: 1 as const, size: 100, entryPx: 100, markPx: 100, maxLeverage: 20, leverage: 2 };
+  const base = { coin: "xyz:CL", assetId: 1, side: 1 as const, size: 100, entryPx: 100, markPx: 100, maxLeverage: 20, leverage: 2, marginMode: "isolated" as const };
   const p = { ...base, ...over };
   const equity = over.equityUsd ?? 5000;
   return {

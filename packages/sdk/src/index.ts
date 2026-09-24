@@ -13,3 +13,4 @@ export * from "./records";
 export * from "./guardian";
 export * from "./report";
 export * from "./onboarding";
+export * from "./assess";

@@ -135,6 +135,7 @@ export async function readAccount(info: InfoClient, user: `0x${string}`, dex: st
       equityUsd: Number(p.marginUsed),
       unrealizedPnlUsd: Number(p.unrealizedPnl),
       leverage: p.leverage.value,
+      marginMode: p.leverage.type,
       maxLeverage: p.maxLeverage,
       liqPx: p.liquidationPx === null ? (szi > 0 ? 0 : Infinity) : Number(p.liquidationPx),
       fundingSinceOpenUsd: Number(p.cumFunding.sinceOpen),
@@ -148,5 +149,11 @@ export async function readAccount(info: InfoClient, user: `0x${string}`, dex: st
   const unified = abstraction === "unifiedAccount" || abstraction === "portfolioMargin";
   const availableUsd = unified ? spotFree : Number(mainState.withdrawable) + Number(dexState.withdrawable);
 
-  return { user, availableUsd, positions, updatedAt: Date.now() };
+  return {
+    user,
+    availableUsd,
+    accountValueUsd: Number(dexState.marginSummary.accountValue),
+    positions,
+    updatedAt: Date.now(),
+  };
 }

@@ -81,7 +81,12 @@ export function ExecutePanel({ plan }: { plan: HedgePlan }) {
         <button className="btn btn-primary mt-4 w-full" disabled={blocked || busy !== null || needFunds} onClick={lock}>
           {busy ? "Locking…" : title}
         </button>
-        {needFunds && <p className="mt-2 text-sm text-bad">Not enough paper balance for the margin. Reset it from the dashboard.</p>}
+        {needFunds && account && (
+          <p className="mt-2 text-sm text-bad">
+            This hedge needs {usd(plan.marginUsd)} of margin, but the paper account has {usd(account.availableUsd)} free. Lower
+            the amount or the share you protect.
+          </p>
+        )}
       </div>
     );
   }

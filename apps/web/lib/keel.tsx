@@ -222,7 +222,8 @@ export function KeelProvider({ children }: { children: ReactNode }) {
   }, [hydrated, mode, user, config, info, wallet, agent, network]);
 
   // --- hedge book (per venue / network / user) --------------------------------
-  const bookKey = `keel:hedges:v1:${mode}:${dataNetwork}:${user.toLowerCase()}`;
+  // v2 pairs with the $1M paper account (keel:paper:v2).
+  const bookKey = `keel:hedges:v2:${mode}:${dataNetwork}:${user.toLowerCase()}`;
   useEffect(() => {
     if (hydrated) setHedgesState(readJson<HedgeRecord[]>(bookKey, []));
   }, [hydrated, bookKey]);

@@ -36,7 +36,8 @@ interface PaperState {
   liquidations: { coin: string; at: number; lossUsd: number }[];
 }
 
-export const PAPER_STARTING_CASH = 100_000;
+/** Businesses hedge six-figure exposures, so the demo account starts with $1M. */
+export const PAPER_STARTING_CASH = 1_000_000;
 /** Simulated half-spread + impact applied to every paper fill. */
 const PAPER_SLIPPAGE = 0.0002;
 
@@ -60,7 +61,8 @@ export class PaperVenue implements Venue {
   ) {}
 
   private get key() {
-    return `keel:paper:${this.opts.user.toLowerCase()}`;
+    // v2: starting balance raised to $1M; older demo accounts start fresh.
+    return `keel:paper:v2:${this.opts.user.toLowerCase()}`;
   }
 
   private now() {

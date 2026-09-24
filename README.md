@@ -6,6 +6,8 @@
 
 Built for the Colosseum Crypto World's Fair hackathon, Hyperliquid track.
 
+**Try it:** [keel-seven-lilac.vercel.app](https://keel-seven-lilac.vercel.app). Paper mode needs no wallet and runs at live Hyperliquid prices. See [Watch mode](https://keel-seven-lilac.vercel.app/watch) for real accounts.
+
 ## What it does
 
 1. **Describe the exposure** in business terms: "we buy 40,000 L of diesel a month for 6 months".

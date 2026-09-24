@@ -14,7 +14,7 @@ export function HealthBar({ distance }: { distance: number | null }) {
       <div className="flex items-center justify-between text-xs">
         <span className="text-muted">Distance to liquidation</span>
         <span className="num" style={{ color }}>
-          {Number.isFinite(distance) ? pct(distance, 0) : "none"} · {status}
+          {!Number.isFinite(distance) ? "none" : distance >= 1 ? ">100%" : pct(distance, 0)} · {status}
         </span>
       </div>
       <div className="relative mt-1.5 h-2 rounded-full bg-surface-2">

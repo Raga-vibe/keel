@@ -198,7 +198,7 @@ function Watch() {
                       <td className="py-1.5 font-sans">{ticker(p.position.coin)}</td>
                       <td className="py-1.5">{p.position.side === 1 ? "long" : "short"}</td>
                       <td className="py-1.5 text-right">{usd(p.notionalUsd, { compact: true })}</td>
-                      <td className="py-1.5 text-right text-muted">{Number.isFinite(p.distance) ? pct(p.distance, 0) : "—"} to liq.</td>
+                      <td className="py-1.5 text-right text-muted">{!Number.isFinite(p.distance) ? "—" : p.distance >= 1 ? ">100%" : pct(p.distance, 0)} to liq.</td>
                     </tr>
                   ))}
                 </tbody>

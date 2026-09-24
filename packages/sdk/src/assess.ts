@@ -97,7 +97,8 @@ export function assessPosition(
   const inCatalog = catalogFor(pos.coin).length > 0;
 
   let recommendation: string;
-  const pctTxt = `${(distance * 100).toFixed(1)}%`;
+  // Over-collateralised cross positions can report liquidation prices many times away; cap the wording.
+  const pctTxt = distance >= 1 ? "more than 100%" : `${(distance * 100).toFixed(1)}%`;
   if (status === "no-liquidation") {
     recommendation = "Fully collateralised. No liquidation risk at any price.";
   } else if (status === "healthy") {

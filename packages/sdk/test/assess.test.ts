@@ -135,3 +135,11 @@ describe("guardian and cross margin", () => {
     expect(actions.some((a) => a.kind === "alert" && a.message.includes("cross-margined"))).toBe(true);
   });
 });
+
+describe("far-away liquidation", () => {
+  it("caps the wording for over-collateralised positions", () => {
+    const a = assessPosition(pos({ side: -1, marginMode: "cross", equityUsd: 50_000, liqPx: 15_000, markPx: 94 }));
+    expect(a.status).toBe("healthy");
+    expect(a.recommendation).toBe("Liquidation is more than 100% away. Nothing to do.");
+  });
+});

@@ -5,7 +5,7 @@ Open-source engine for hedging real-world costs — fuel, metals, foreign-curren
 - **Speaks business units.** "40,000 litres of diesel a month" in, "long 1,132.16 bbl Brent at 2x" out.
 - **Risk-first.** Low-leverage isolated positions, liquidation math that matches Hyperliquid's, stress tests, and a guardian that keeps hedges alive.
 - **Venue-agnostic.** The same plan runs against live Hyperliquid (via an agent key) or a paper venue that fills at live prices.
-- **Pure core.** Planning, scenarios and guardian decisions are pure functions over data — easy to test, audit and reuse. 32 unit tests.
+- **Pure core.** Planning, scenarios and guardian decisions are pure functions over data — easy to test, audit and reuse. 33 unit tests.
 
 Built on [`@nktkas/hyperliquid`](https://github.com/nktkas/hyperliquid) and [viem](https://viem.sh).
 

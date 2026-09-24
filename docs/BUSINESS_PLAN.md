@@ -131,7 +131,7 @@ For scale, all Hyperliquid builder codes together routed $24B of volume in a rec
 ## 7. Traction and status
 
 - **Live product** on Vercel: market board, hedge wizard, dashboard with guardian, simulation lab, and watch mode on real accounts.
-- **Open-source hedge engine** (`@keel/hedge-sdk`) with 32 unit tests, continuous integration, runnable examples, and methodology and architecture docs.
+- **Open-source hedge engine** (`@keel/hedge-sdk`) with 33 unit tests, continuous integration, runnable examples, and methodology and architecture docs.
 - **Checked against Hyperliquid:**
   - live mainnet prices, funding and positions;
   - signed HIP-3 orders accepted by the exchange's signature check on testnet;

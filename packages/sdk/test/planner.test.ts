@@ -67,6 +67,17 @@ describe("planHedge", () => {
     expect(plan.warnings.some((w) => w.code === "thin-market")).toBe(true);
   });
 
+  it("uses less margin for FX, staying outside the guardian's trigger", () => {
+    const m = marketsMap(market("xyz:EUR", 1.14, { szDecimals: 1, maxLeverage: 50 }));
+    const plan = planHedge(
+      { exposureId: "eur", unitId: "EUR", quantity: 250_000, frequency: "once", periods: 1, direction: "buy", hedgeRatio: 1 },
+      m,
+      { config: cfg, now: NOW },
+    );
+    expect(plan.leverage).toBe(3);
+    expect(plan.liqDistance).toBeGreaterThan(0.25);
+  });
+
   it("blocks hedges under the $10 minimum", () => {
     const plan = planHedge(
       { exposureId: "diesel", unitId: "L", quantity: 5, frequency: "once", periods: 1, direction: "buy", hedgeRatio: 1 },

@@ -16,6 +16,8 @@ import type { ExposureInput, HedgePlan, PlanCosts, PlanWarning, SettlementStep }
 export const MIN_ORDER_USD = 10;
 /** Default adverse-move buffer before liquidation when leverage is not specified. */
 export const DEFAULT_LIQ_BUFFER = 0.45;
+/** Major currencies rarely move 30% in a year, so FX hedges can tie up less cash. */
+export const FX_LIQ_BUFFER = 0.3;
 /** Never pick more than this leverage automatically — hedges should survive big moves. */
 export const MAX_AUTO_LEVERAGE = 3;
 
@@ -75,7 +77,8 @@ export function planHedge(
   const size = floorToLot(fullHedgeSize * ratio, market.szDecimals);
   const notionalUsd = size * refPx;
 
-  const autoLev = Math.min(MAX_AUTO_LEVERAGE, leverageForBuffer(side, market.maxLeverage, DEFAULT_LIQ_BUFFER));
+  const buffer = exposure.category === "fx" ? FX_LIQ_BUFFER : DEFAULT_LIQ_BUFFER;
+  const autoLev = Math.min(MAX_AUTO_LEVERAGE, leverageForBuffer(side, market.maxLeverage, buffer));
   const leverage = Math.max(1, Math.min(market.maxLeverage, Math.round(input.leverage ?? autoLev)));
   const marginUsd = initialMargin(notionalUsd, leverage);
   const liqPx = liquidationPrice({ side, size, price: refPx, equity: marginUsd, maxLeverage: market.maxLeverage });

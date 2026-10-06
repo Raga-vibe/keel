@@ -58,7 +58,7 @@ export default function Dashboard() {
             </button>
           )}
           <Link href="/hedge" className="btn btn-primary text-sm">
-            New hedge
+            Plan a cost
           </Link>
         </div>
       </div>
@@ -79,9 +79,9 @@ export default function Dashboard() {
           {hedges.length === 0 ? (
             <div className="card p-10 text-center">
               <p className="font-semibold">No hedges yet</p>
-              <p className="mt-1 text-sm text-ink-2">Plan one in under a minute. Paper mode needs no wallet.</p>
+              <p className="mt-1 text-sm text-ink-2">Model a future bill in paper mode with live prices and simulated trades.</p>
               <Link href="/hedge" className="btn btn-primary mt-4">
-                Plan a hedge
+                Plan a future cost
               </Link>
             </div>
           ) : (

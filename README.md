@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Raga-vibe/keel/actions/workflows/ci.yml/badge.svg)](https://github.com/Raga-vibe/keel/actions/workflows/ci.yml)
 
-**Price certainty for real businesses.** Keel lets a fleet operator lock in diesel costs, a jeweller lock in gold, or an importer lock in a euro invoice, using Hyperliquid's 24/7 HIP-3 commodity and FX perpetuals. There's no bank, no futures account, and no custody: hedges live in the user's own Hyperliquid account.
+**Plan for future business costs.** Keel turns a future invoice or scheduled purchase into a modeled hedge on Hyperliquid's 24/7 HIP-3 markets. For example, an importer owing €250,000 in 90 days can review a EUR/USD position sized to offset some currency movement, the USDC margin it needs, estimated costs, and planned close dates. A hedge does not set the supplier's price or remove risk: funding changes, collateral is required, and the benchmark may not match the exact invoice.
 
 Built for the Colosseum Crypto World's Fair hackathon, Hyperliquid track.
 
@@ -10,9 +10,11 @@ Built for the Colosseum Crypto World's Fair hackathon, Hyperliquid track.
 
 ## What it does
 
-1. **Describe the exposure** in business terms: "we buy 40,000 L of diesel a month for 6 months".
-2. **Keel plans the hedge**: it maps the exposure onto the right benchmark (Brent, WTI, gold, copper, EUR/USD, …), converts units, sizes a low-leverage isolated position, estimates fees and funding (median of the last 14 days), stress-tests ±30% moves, and builds an unwind schedule that follows the purchases.
-3. **The guardian runs it**: it tops up margin before liquidation gets close, closes each slice when its purchase date arrives, reconciles positions against the hedge book, and exports an accountant-friendly CSV.
+1. **Describe the future cost** in business terms: amount, currency or commodity, and payment or purchase date.
+2. **Review an estimated hedge plan**: Keel maps the cost to a benchmark (EUR/USD, Brent, gold, copper, and more), converts units, estimates position size, USDC margin, fees and funding, and shows price-move scenarios.
+3. **Monitor and unwind**: the guardian watches liquidation risk and can close scheduled slices as purchases happen. The browser guardian runs while the app is open; 24/7 use requires the separate keeper.
+
+Paper mode uses live market prices with simulated fills. The live order flow was verified on testnet and has not been used with real funds. Keel sends orders to the user's Hyperliquid account and does not hold funds.
 
 **Watch mode** runs the same risk engine read-only on *any* Hyperliquid address: it shows each commodity/FX position's liquidation distance, what Keel's guardian would do, and the real-world exposure it's equivalent to (e.g. "protects sales of 2,081 kg of silver"). It can also find live accounts from Hyperliquid's public trade feed.
 

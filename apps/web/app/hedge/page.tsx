@@ -73,15 +73,15 @@ function Wizard() {
 
   return (
     <div className="pt-10">
-      <h1 className="font-serif text-3xl font-semibold">New hedge</h1>
+      <h1 className="font-serif text-3xl font-semibold">Plan a future cost</h1>
       <p className="mt-1 text-ink-2">
-        Tell Keel what your business buys or sells. The plan updates live from Hyperliquid prices.
+        Enter a bill or purchase and when it is due. Keel estimates a position that may offset some matching benchmark price moves.
         {mode === "paper" && " You're in paper mode: nothing real is traded."}
       </p>
 
       {/* Step 1: exposure */}
       <section className="mt-8">
-        <h2 className="label mb-3">1 · What do you want to protect?</h2>
+        <h2 className="label mb-3">1 · What price could affect your budget?</h2>
         <div className="space-y-3">
           {CATEGORIES.map((c) => (
             <div key={c.id} className="flex flex-wrap items-center gap-2">
@@ -108,7 +108,7 @@ function Wizard() {
       <div className="mt-8 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
         {/* Step 2: details */}
         <section className="card space-y-5 p-5 lg:sticky lg:top-20">
-          <h2 className="label">2 · Your exposure</h2>
+          <h2 className="label">2 · Your bill or purchase</h2>
 
           <div className="seg w-full">
             <button className="flex-1" aria-pressed={form.direction === "buy"} onClick={() => set("direction", "buy")}>
@@ -190,7 +190,7 @@ function Wizard() {
           <div>
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium" htmlFor="ratio">
-                How much to protect
+                Share of price movement to offset
               </label>
               <span className="num text-sm">{Math.round(form.hedgeRatio * 100)}%</span>
             </div>
@@ -204,7 +204,10 @@ function Wizard() {
               value={form.hedgeRatio * 100}
               onChange={(e) => set("hedgeRatio", Number(e.target.value) / 100)}
             />
-            <p className="text-xs text-muted">Most businesses hedge 50–80%, keeping some upside if prices fall.</p>
+            <p className="text-xs text-muted">
+              A {Math.round(form.hedgeRatio * 100)}% hedge aims to offset roughly {Math.round(form.hedgeRatio * 100)}% of matching
+              benchmark moves. The rest stays exposed, and actual results can differ.
+            </p>
           </div>
 
           <details className="text-sm">
@@ -280,7 +283,7 @@ function Wizard() {
 
         {/* Step 3: plan */}
         <section className="space-y-4">
-          <h2 className="label">3 · Your plan</h2>
+          <h2 className="label">3 · Estimated hedge plan</h2>
           {error && <div className="rounded-xl bg-bad-soft px-4 py-3 text-sm text-bad">{error}</div>}
           {!markets && !error && <div className="card h-96 animate-pulse" />}
           {plan && (

@@ -62,12 +62,12 @@ export function HedgeCard({ record, row }: { record: HedgeRecord; row: HedgeRepo
 
       <div className="mt-4 grid gap-4 sm:grid-cols-3">
         <div>
-          <div className="text-xs text-muted">{perUnit ? `Locked per ${unit}` : "Locked rate"}</div>
+          <div className="text-xs text-muted">{perUnit ? `Entry benchmark per ${unit}` : "Entry benchmark rate"}</div>
           <div className="num text-xl">
             {perUnit ? `$${record.lockedPerUserUnit! < 1 ? record.lockedPerUserUnit!.toFixed(4) : price(record.lockedPerUserUnit!)}` : price(record.entryPx)}
           </div>
           <div className="num text-xs text-muted">
-            market now{" "}
+            benchmark now{" "}
             {perUnit
               ? `$${row.marketPerUnit! < 1 ? row.marketPerUnit!.toFixed(4) : price(row.marketPerUnit!)}`
               : row.markPx !== null

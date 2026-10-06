@@ -15,44 +15,48 @@ export function PlanPanel({ plan, localPrice }: { plan: HedgePlan; localPrice?: 
   return (
     <div className="space-y-4">
       <div className="card p-5">
-        <div className="label">You lock in</div>
+        <div className="label">Benchmark price at plan time</div>
         {plan.lockedPerUserUnit !== null && !fx ? (
           <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
             <span className="num text-4xl font-medium">${plan.lockedPerUserUnit < 1 ? plan.lockedPerUserUnit.toFixed(4) : price(plan.lockedPerUserUnit)}</span>
             <span className="text-ink-2">
-              per {plan.unit.label.replace(/s$/, "")} {plan.exposure.basisNote ? "(benchmark component)" : ""}
+              per {plan.unit.label.replace(/s$/, "")} {plan.exposure.basisNote ? "(benchmark only)" : ""}
             </span>
           </div>
         ) : (
           <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
-            <span className="num text-4xl font-medium">{price(plan.lockedRate)}</span>
-            <span className="text-ink-2">{plan.instrument.label}</span>
+            <span className="num text-4xl font-medium">
+              {plan.exposure.inverseQuote ? price(plan.lockedRate) : `$${price(plan.lockedRate)}`}
+            </span>
+            <span className="text-ink-2">
+              {plan.exposure.inverseQuote ? "JPY per USD" : `USD per ${plan.unit.label.replace(/s$/, "")}`}
+            </span>
           </div>
         )}
         {localPrice && plan.lockedPerUserUnit !== null ? (
           <p className="mt-2 text-sm text-ink-2">
             You pay about <span className="num">${localPrice.toFixed(3)}</span> per {unitShort} today. The benchmark part (
-            <span className="num">{pct(plan.lockedPerUserUnit / localPrice, 0)}</span> of it) is what moves with global prices, and
-            that part is now fixed for {pct(plan.input.hedgeRatio, 0)} of your volume.
+            <span className="num">{pct(plan.lockedPerUserUnit / localPrice, 0)}</span> of it) moves with global prices. This plan
+            aims to offset those moves for {pct(plan.input.hedgeRatio, 0)} of your volume; local costs remain exposed.
           </p>
         ) : (
           <p className="mt-2 text-sm text-ink-2">
-            {pct(plan.input.hedgeRatio, 0)} of {usd(plan.exposureUsd, { compact: true })} exposure over {Math.round(plan.horizonDays)} days.
+            This plan targets {pct(plan.input.hedgeRatio, 0)} of {usd(plan.exposureUsd, { compact: true })} over {Math.round(plan.horizonDays)} days.
           </p>
         )}
 
         <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-sm sm:grid-cols-3">
           <Item k="Position" v={`${sideWord} ${qty(plan.size, 4)} ${plan.instrument.unit}`} sub={ticker(plan.market.coin)} />
           <Item k="Hedge value" v={usd(plan.notionalUsd)} />
-          <Item k="Margin needed" v={usd(plan.marginUsd)} sub={`${plan.leverage}x isolated`} />
+          <Item k="USDC margin estimate" v={usd(plan.marginUsd)} sub={`${plan.leverage}x isolated`} />
           <Item
-            k="Liquidation"
+            k="Modeled liquidation"
             v={price(plan.liqPx)}
             sub={`${pct(plan.liqDistance, 0)} ${plan.side === 1 ? "drop" : "rise"} away`}
             tone={plan.liqDistance < 0.25 ? "bad" : undefined}
           />
           <Item
-            k="All-in cost"
+            k="Estimated fees + funding"
             v={usd(plan.costs.totalUsd)}
             sub={`${pct(plan.costs.totalPctOfHedged, 2)} of hedge`}
             tone={plan.costs.totalUsd < 0 ? "good" : undefined}
@@ -81,21 +85,21 @@ export function PlanPanel({ plan, localPrice }: { plan: HedgePlan; localPrice?: 
 
       <div className="card p-5">
         <div className="mb-3 flex items-center justify-between">
-          <h3 className="font-semibold">Stress test</h3>
+          <h3 className="font-semibold">Price-move examples</h3>
         </div>
         <ScenarioChart plan={plan} scenarios={scenarios} />
       </div>
 
       <div className="card p-5">
         <button className="flex w-full items-center justify-between" onClick={() => setShowSchedule((v) => !v)}>
-          <h3 className="font-semibold">Unwind schedule</h3>
+          <h3 className="font-semibold">Planned close dates</h3>
           <span className="text-sm text-muted">
             {plan.schedule.length} step{plan.schedule.length > 1 ? "s" : ""} · {showSchedule ? "hide" : "show"}
           </span>
         </button>
         <p className="mt-1 text-sm text-ink-2">
-          On each date you make your purchase and Keel closes the matching slice of the hedge, so the hedge always matches what
-          you still have to buy.
+          Keel can close a planned slice on each purchase date. This schedule assumes the position fills as planned and your account
+          is not changed manually.
         </p>
         {showSchedule && (
           <table className="mt-3 w-full text-sm">

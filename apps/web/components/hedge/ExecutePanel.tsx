@@ -47,7 +47,7 @@ export function ExecutePanel({ plan }: { plan: HedgePlan }) {
       if (result.status === "error") throw new Error(result.message ?? "Order rejected");
       setDone(
         result.status === "filled"
-          ? `Locked. ${plan.side === 1 ? "Long" : "Short"} ${qty(result.filledSize, 4)} at ${result.avgPx.toFixed(4)}.`
+          ? `${mode === "paper" ? "Paper hedge simulated." : "Hedge opened."} ${plan.side === 1 ? "Long" : "Short"} ${qty(result.filledSize, 4)} at ${result.avgPx.toFixed(4)}.`
           : `Order placed at the oracle price and waiting for a fill (order ${result.oid}). The dashboard updates when it fills.`,
       );
       return record;
@@ -58,7 +58,9 @@ export function ExecutePanel({ plan }: { plan: HedgePlan }) {
     return (
       <div className="card border-good p-5">
         <div className="font-semibold text-good">{done}</div>
-        <p className="mt-1 text-sm text-ink-2">The guardian now watches margin and releases each slice on schedule.</p>
+        <p className="mt-1 text-sm text-ink-2">
+          Find the position on your dashboard. The browser guardian runs while this app is open; 24/7 monitoring needs the separate keeper.
+        </p>
         <Link href="/dashboard" className="btn btn-primary mt-4">
           Go to dashboard →
         </Link>
@@ -66,15 +68,15 @@ export function ExecutePanel({ plan }: { plan: HedgePlan }) {
     );
   }
 
-  const title = mode === "paper" ? "Lock this price (paper)" : `Lock on ${network}`;
+  const title = mode === "paper" ? "Open paper hedge" : `Open hedge on ${network}`;
 
   // ---- paper -------------------------------------------------------------------
   if (mode === "paper") {
     return (
       <div className="card p-5">
-        <h3 className="font-semibold">Ready to lock</h3>
+        <h3 className="font-semibold">Simulate this hedge</h3>
         <p className="mt-1 text-sm text-ink-2">
-          Paper mode fills at live Hyperliquid prices with estimated fees and funding. Balance{" "}
+          Paper mode uses live Hyperliquid prices, but the fills and balance are simulated. No real order is placed. Balance{" "}
           <span className="num">{account ? usd(account.availableUsd) : "…"}</span>.
         </p>
         {error && <p className="mt-3 rounded-lg bg-bad-soft px-3 py-2 text-sm text-bad">{error}</p>}
@@ -179,7 +181,7 @@ export function ExecutePanel({ plan }: { plan: HedgePlan }) {
 
   return (
     <div className="card p-5">
-      <h3 className="font-semibold">Lock it live</h3>
+      <h3 className="font-semibold">Open this hedge on Hyperliquid</h3>
       <ol className="mt-3 space-y-3">
         {steps.map((s, i) => (
           <li key={s.id} className="flex gap-3">

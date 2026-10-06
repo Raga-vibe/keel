@@ -7,10 +7,10 @@ import { shortAddr } from "@/lib/format";
 import { Logo } from "./Logo";
 
 const LINKS = [
-  { href: "/", label: "Markets" },
-  { href: "/hedge", label: "New hedge" },
+  { href: "/", label: "Overview" },
+  { href: "/hedge", label: "Plan costs" },
   { href: "/dashboard", label: "Dashboard" },
-  { href: "/watch", label: "Watch" },
+  { href: "/watch", label: "Account watch" },
 ];
 
 export function Nav() {
